@@ -16,11 +16,11 @@ public class Mapper<T> {
     public Mapper () {
     }
 
-    public T castToT (ResultSet rs) {
+    public T castToT (ResultSet rs,T t) {
         Annotations<T> a = null;
         try {
             rs.first ();
-            o = createInstance ();
+            o = t;
             a = new Annotations<> (o);
             List<Field> fields = a.getFields ();
             ResultSetMetaData rsm = rs.getMetaData ();
@@ -32,8 +32,6 @@ public class Mapper<T> {
                 }
             }
 
-        } catch (InstantiationException e) {
-            e.printStackTrace ();
         } catch (IllegalAccessException e) {
             e.printStackTrace ();
         } catch (SQLException e) {
@@ -41,9 +39,5 @@ public class Mapper<T> {
         }
         return o;
     }
-    public T createInstance() throws IllegalAccessException, InstantiationException {
-        Class<T> t = (Class<T>) this.getClass().getGenericSuperclass();
-        o = t.newInstance();
-        return o;
-    }
+
 }

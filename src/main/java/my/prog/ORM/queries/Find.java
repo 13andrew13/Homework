@@ -1,19 +1,13 @@
 package my.prog.ORM.queries;
 
 import my.prog.ORM.annotations.Annotations;
-import my.prog.ORM.annotations.Column;
-
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.sql.*;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+
 
 public class Find<T> extends Query<T> {
     private final String start = "select * from ";
     private long id;
-    private T o;
     private Mapper<T> mapper;
     public Find ( long id,Connection connection) {
         this.id = id;
@@ -23,28 +17,26 @@ public class Find<T> extends Query<T> {
 
     @Override
     public T execute () {
+        T o = null;
         Mapper<T> mapper = new Mapper<> ();
         try {
-            o = mapper.createInstance ();
+            o = createInstance ();
         } catch (IllegalAccessException e) {
             e.printStackTrace ();
         } catch (InstantiationException e) {
             e.printStackTrace ();
         }
-        Annotations<T> a = new Annotations<> (o);
+        Annotations<T> a = new Annotations<> ((T)o);
         StringBuilder builder = new StringBuilder (start);
-        StringJoiner joiner = new StringJoiner (" and ");
+
         builder.append (a.getTableName ());
         builder.append (" WHERE " );
-        joiner.add ("id = ?");
-        builder.append (joiner.toString () +";" );
+        builder.append (" id=" +id + ";");
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement (builder.toString ());
-
-
             ResultSet rs = statement.executeQuery ();
-            o = mapper.castToT (rs);
+            o = mapper.castToT (rs,o);
 
         } catch (SQLException e) {
             e.printStackTrace ();
@@ -52,6 +44,10 @@ public class Find<T> extends Query<T> {
 
         return  o;
 
+    }
+    public T createInstance() throws IllegalAccessException, InstantiationException {
+        T res = (T) ((Class)((ParameterizedType)this.getClass ().getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
+        return res;
     }
 
 
