@@ -8,7 +8,7 @@ import my.prog.ORM.annotations.Table;
 @Table (name = "USERS")
 public class User {
     @ID
-    private Long id;
+    private long id;
     @Column ("firstname")
     private String name;
     @Column ("email")

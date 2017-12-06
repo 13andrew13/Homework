@@ -1,7 +1,5 @@
 package my.prog.ORM.annotations;
 
-import my.prog.ORM.InstanceFactory;
-
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -58,12 +56,15 @@ public class Annotations<T> {
     }
 
 
-      public Field getIdField(){
-          for (Field field : getFields ()) {
-              if(field.getAnnotation (ID.class)!=null){
-                  return field;
+    public Field getIdField(){
+        Field res = null;
+        for (Field field : t.getClass ().getDeclaredFields ()) {
+            field.setAccessible (true);
+            ID c = field.getAnnotation (ID.class);
+            if(c!=null){
+                res = field;
+            }
               }
+              return res;
           }
-          return null;
-      }
 }

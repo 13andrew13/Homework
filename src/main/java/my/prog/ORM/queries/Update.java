@@ -28,27 +28,18 @@ public class Update<T> extends Query<T>{
         int i =0;
         for (Map.Entry<String, String> entry : columns.entrySet ()) {
             if(!entry.getValue ().equals (null)&&!entry.getValue ().equals ("null")) {
-                joiner.add (entry.getKey () + "=? ");
+                joiner.add (entry.getKey () + "='"+entry.getValue ()+"'");
             }
-
         }
-        builder.append (joiner.toString () +" where id =?" );
         PreparedStatement statement = null;
         try {
+            builder.append (joiner.toString () +" where id=" + a.getIdField ().getLong (t) + ";" );
             statement = connection.prepareStatement (builder.toString ());
-
-            i =1;
-            for(String s: columns.values ()){
-                if(s !=null&& !s.equals ("null")){
-                    statement.setString (i,s);
-                    i++;
-                }
-            }
-
-
-            statement.execute ();
+            statement.executeUpdate ();
 
         } catch (SQLException e) {
+            e.printStackTrace ();
+        } catch (IllegalAccessException e) {
             e.printStackTrace ();
         }
 
