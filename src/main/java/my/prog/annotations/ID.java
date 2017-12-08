@@ -1,4 +1,4 @@
-package my.prog.ORM.annotations;
+package my.prog.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

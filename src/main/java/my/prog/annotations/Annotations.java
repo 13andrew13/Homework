@@ -1,4 +1,4 @@
-package my.prog.ORM.annotations;
+package my.prog.annotations;
 
 import java.lang.reflect.Field;
 import java.util.*;

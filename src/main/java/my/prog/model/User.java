@@ -1,9 +1,9 @@
 package my.prog.model;
 
 
-import my.prog.ORM.annotations.Column;
-import my.prog.ORM.annotations.ID;
-import my.prog.ORM.annotations.Table;
+import my.prog.annotations.Column;
+import my.prog.annotations.ID;
+import my.prog.annotations.Table;
 
 @Table (name = "USERS")
 public class User {
@@ -16,13 +16,10 @@ public class User {
     @Column ("password")
     private String password;
 
+    private String token;
+
     public User(){}
 
-    public User (String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
 
     public Long getId () {
         return id;
@@ -72,5 +69,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public void setToken (String token) {
+        this.token = token;
     }
 }

@@ -1,6 +1,8 @@
 package my.prog.Factoy;
 
-import my.prog.controller.UserController;
+import my.prog.controller.Controller;
+import my.prog.controller.LoginUserController;
+
 import my.prog.dao.UserDAO;
 import my.prog.dao.UserDAOImpl;
 import my.prog.service.UserService;
@@ -9,6 +11,7 @@ import my.prog.service.UserServiceImpl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.function.Function;
 
 public class Factory {
     static {
@@ -28,7 +31,9 @@ public class Factory {
         }
         return connection;
     }
-
+    public static <T,R> Function<T,R> getSomething(Function<T,R> f){
+        return f;
+    }
 
     public static UserService getUserSevice(UserDAO userDAO){
         return new UserServiceImpl (userDAO);
@@ -36,8 +41,8 @@ public class Factory {
     public static UserDAO getUserDAO(){
         return new UserDAOImpl (getConnection ());
     }
-    public static UserController getController(UserService userService){
-        return new UserController (userService);
+    public static Controller getController(UserService userService){
+        return new LoginUserController (userService);
 
     }
 }
