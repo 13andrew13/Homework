@@ -143,9 +143,4 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
         return  t;
     }
 
-    public static void main (String[] args) {
-        UserDAOImpl abstractDAO = new UserDAOImpl (Factory.getConnection ());
-
-        System.out.println (abstractDAO.findByEmail ("anton@mail.ru"));
-    }
 }
