@@ -5,7 +5,6 @@ import my.prog.controller.Controller;
 import my.prog.controller.LoginUserController;
 
 import my.prog.dao.UserDAOImpl;
-import my.prog.service.UserService;
 import my.prog.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -22,7 +21,19 @@ public class MainServlet extends HttpServlet{
 
     @Override
     public void init () throws ServletException {
-        CONTROLLER_MAP.put (new Request ("/login","POST"), Factory.getSomething (LoginUserController::new)
+        CONTROLLER_MAP.put (new Request ("/servlet/login","GET"), Factory.getSomething (LoginUserController::new)
+                .compose(UserServiceImpl::new)
+                .compose (UserDAOImpl::new)
+                .apply (Factory.getConnection ()));
+        CONTROLLER_MAP.put (new Request ("/servlet/login","POST"), Factory.getSomething (LoginUserController::new)
+                .compose(UserServiceImpl::new)
+                .compose (UserDAOImpl::new)
+                .apply (Factory.getConnection ()));
+        CONTROLLER_MAP.put (new Request ("/servlet/signUp","GET"), Factory.getSomething (LoginUserController::new)
+                .compose(UserServiceImpl::new)
+                .compose (UserDAOImpl::new)
+                .apply (Factory.getConnection ()));
+        CONTROLLER_MAP.put (new Request ("/servlet/signUp","POST"), Factory.getSomething (LoginUserController::new)
                 .compose(UserServiceImpl::new)
                 .compose (UserDAOImpl::new)
                 .apply (Factory.getConnection ()));
@@ -31,13 +42,15 @@ public class MainServlet extends HttpServlet{
     @Override
     public void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest (req,resp);
+/*
 
-       /* if(req.getRequestURI ().equals ("/servlet/home")){
+        if(req.getRequestURI ().equals ("/servlet/home")){
             req.getRequestDispatcher ("/WEB-INF/home.jsp").forward (req,resp);
         }
         else {
 
-        }*/
+        }
+*/
     }
 
     @Override
@@ -57,7 +70,7 @@ public class MainServlet extends HttpServlet{
     }
 
     private void forward (HttpServletRequest req, HttpServletResponse resp, ViewModel vm) throws ServletException, IOException {
-        processAttribute(req,vm);
+        //processAttribute(req,vm);
         req.getRequestDispatcher (vm.getView ()).forward (req,resp);
 
     }
@@ -66,5 +79,6 @@ public class MainServlet extends HttpServlet{
         if(vm.getArgumentsMap ().isEmpty ()){
             return;
         }
+        //vm.getArgumentsMap ();
     }
 }

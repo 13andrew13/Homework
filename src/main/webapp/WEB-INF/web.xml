@@ -3,7 +3,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>my.prog.web.MainServlet</servlet-class>
@@ -12,4 +11,15 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/servlet/*</url-pattern>
     </servlet-mapping>
+
+
+
+    <!--filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>my.prog.web.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/servlet/*</url-pattern>
+    </filter-mapping-->
 </web-app>

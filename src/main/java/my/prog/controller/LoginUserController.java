@@ -18,13 +18,14 @@ public class LoginUserController implements Controller{
 
     @Override
     public ViewModel process (HttpServletRequest request, HttpServletResponse response) {
-        if(request.getMethod ().equals (GET)){
+        ViewModel vm = new ViewModel ("login");
+        if(request.getMethod ().equals (GET.toString ())){
             return new ViewModel ("login");
         }
         String email = request.getParameter ("email");
         String password = request.getParameter ("password");
         String token = service.checkUser(email,password).orElse ("unauthorised");
         response.addCookie (new Cookie ("MyApp",token));
-        return null;
+        return vm;
     }
 }

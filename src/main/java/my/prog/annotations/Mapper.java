@@ -26,7 +26,6 @@ public class Mapper<T> {
             rs.first ();
             a = new Annotations<> (t);
             List<Field> fields = a.getFields ();
-            ResultSetMetaData rsm = rs.getMetaData ();
             while (rs.next ()){
                 t = (T) t.getClass ().newInstance ();
 

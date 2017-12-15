@@ -29,7 +29,7 @@ public class ViewModel {
     }
 
     public String getView () {
-        return String.format ("%s%s%s", PREFIX, view, SUFIX);
+        return PREFIX +  view + SUFIX;
     }
 
     public void setView (String view) {

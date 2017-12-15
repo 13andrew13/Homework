@@ -12,6 +12,8 @@
 </head>
 <body>
 <h1>Hello from JSP!</h1>
+<a href="/servlet/login"><h3>Sign up</h3></a>
+<a href="/servlet/login"><h3>Login</h3></a>
 
 </body>
 </html>

@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<String> checkUser (String email, String password) {
-        User user = userDAO.findByEmail(email).get (0);
+        User user = userDAO.findByEmail(email);
         if(user.getPassword ().equals (password)){//TODO check password using hashing
            String token = LocalTime.now ().toString ();
            user.setToken(token);
