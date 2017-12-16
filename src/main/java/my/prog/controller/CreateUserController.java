@@ -23,15 +23,13 @@ public class CreateUserController implements Controller{
     @Override
     public ViewModel process (HttpServletRequest request, HttpServletResponse response) {
         ViewModel vm = new ViewModel ("register");
-        if(request.getMethod ().equals (POST)){
-            return new ViewModel ("login");
+        if(request.getMethod ().equals (GET.toString ())){
+            return new ViewModel ("register");
         }
         String name  = request.getParameter ("name");
         String email = request.getParameter ("email");
         String password = request.getParameter ("password");
-        String token = service.checkUser(email,password).orElse ("unauthorised");
         service.create (new User (name,email,password));
-        response.addCookie (new Cookie ("MyApp",token));
         return vm;
     }
 }

@@ -11,7 +11,7 @@
     <title>Sign up</title>
 </head>
 <body>
-<form id="login" action="/servlet/login" method="post">
+<form id="login" action="/servlet/signUp" method="post">
     <div class="field">
         <label>Enter your name:</label>
         <div class="input"><input type="text" name="name"/></div>

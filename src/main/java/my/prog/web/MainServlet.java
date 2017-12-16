@@ -2,6 +2,7 @@ package my.prog.web;
 
 import my.prog.Factoy.Factory;
 import my.prog.controller.Controller;
+import my.prog.controller.CreateUserController;
 import my.prog.controller.LoginUserController;
 
 import my.prog.dao.UserDAOImpl;
@@ -29,11 +30,11 @@ public class MainServlet extends HttpServlet{
                 .compose(UserServiceImpl::new)
                 .compose (UserDAOImpl::new)
                 .apply (Factory.getConnection ()));
-        CONTROLLER_MAP.put (new Request ("/servlet/signUp","GET"), Factory.getSomething (LoginUserController::new)
+        CONTROLLER_MAP.put (new Request ("/servlet/signUp","GET"), Factory.getSomething (CreateUserController::new)
                 .compose(UserServiceImpl::new)
                 .compose (UserDAOImpl::new)
                 .apply (Factory.getConnection ()));
-        CONTROLLER_MAP.put (new Request ("/servlet/signUp","POST"), Factory.getSomething (LoginUserController::new)
+        CONTROLLER_MAP.put (new Request ("/servlet/signUp","POST"), Factory.getSomething (CreateUserController::new)
                 .compose(UserServiceImpl::new)
                 .compose (UserDAOImpl::new)
                 .apply (Factory.getConnection ()));

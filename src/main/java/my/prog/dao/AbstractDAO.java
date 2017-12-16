@@ -18,7 +18,7 @@ public abstract class AbstractDAO<T> implements GenericDAO<T> {
     public T create (T t) {
         Annotations<T> a = new Annotations<> (t);
         Map<String,String> columns = a.getColumnsAndValues ();
-        StringBuilder builder = new StringBuilder ("insert into");
+        StringBuilder builder = new StringBuilder ("insert into ");
         builder.append (a.getTableName ());
         builder.append (" ( ");
         for (String s : columns.keySet ()) {

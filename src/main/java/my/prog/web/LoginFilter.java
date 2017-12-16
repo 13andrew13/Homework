@@ -19,7 +19,7 @@ import static my.prog.util.ApplicationConstants.TOKEN;
 public class LoginFilter implements Filter {
 
     private UserDAO userDao;
-    private final String protectedURL = "/servlet/profile";
+    private final String protectedURL = "/servlet/login";
 
     @Override
     public void init (FilterConfig filterConfig) throws ServletException {
