@@ -23,14 +23,16 @@ public class Mapper<T> {
         Annotations<T> a = null;
         List<T> result = new ArrayList<> ();
         try {
-            rs.first ();
+
             a = new Annotations<> (t);
             List<Field> fields = a.getFields ();
+
             while (rs.next ()){
                 t = (T) t.getClass ().newInstance ();
 
                 for (Field field : fields){
                     field.setAccessible (true);
+
                     switch (field.getType ().getSimpleName ()) {
                         case "Long":
                         case "Integer":

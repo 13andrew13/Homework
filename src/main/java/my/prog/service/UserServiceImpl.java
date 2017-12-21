@@ -42,8 +42,6 @@ public class UserServiceImpl implements UserService {
            userDAO.update (user);
             return Optional.of (token);
         }
-
-
         return Optional.empty ();
     }
 }

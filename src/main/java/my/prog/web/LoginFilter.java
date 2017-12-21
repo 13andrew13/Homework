@@ -11,6 +11,7 @@ import my.prog.model.User;
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static my.prog.util.ApplicationConstants.TOKEN;
@@ -19,7 +20,7 @@ import static my.prog.util.ApplicationConstants.TOKEN;
 public class LoginFilter implements Filter {
 
     private UserDAO userDao;
-    private final String protectedURL = "/servlet/login";
+    private final String protectedURL = "/servlet/profile";
 
     @Override
     public void init (FilterConfig filterConfig) throws ServletException {
@@ -29,6 +30,7 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter (ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        //HttpServletResponse response = (HttpServletResponse) servletResponse;
         Cookie[] cookies = request.getCookies ();
         String uri = request.getRequestURI ();
         if(uri.equals (protectedURL)){
@@ -42,9 +44,11 @@ public class LoginFilter implements Filter {
                 }
             }
             if(token == null){
-                request.getRequestDispatcher ("");
+                //response.sendRedirect ("/servlet/login");
+                request.getRequestDispatcher ("/servlet/login").forward (request,servletResponse);
             }
         }
+        filterChain.doFilter (request,servletResponse);
 
     }
 
