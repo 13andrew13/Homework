@@ -28,10 +28,11 @@
             <button type="reset" class="res">Reset</button>
             <button type="submit" class="ent">Enter</button>
         </div>
-        <div style="margin: 0 auto; ">
-            <a href="/servlet/facebookLogin">Login Facebook </a>
-        </div>
+
     </form>
+    <div style="margin: auto; ">
+        <a href="/servlet/facebookLogin">Login Facebook </a>
+    </div>
 </div>
 </body>
 </html>

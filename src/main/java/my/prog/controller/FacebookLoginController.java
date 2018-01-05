@@ -21,7 +21,7 @@ public class FacebookLoginController implements Controller{
         ViewModel vm = new ViewModel ("facebookLoginPage");
         Facebook facebook = new Facebook ();
         User user = facebook.fetchObject ();
-        service.checkUser (user.getEmail (),user.getPassword ());
+       // service.checkUser (user.getEmail (),user.getPassword ());
         request.setAttribute ("name",user.getName ());
         request.setAttribute ("email",user.getEmail ());
         return vm;

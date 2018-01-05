@@ -14,7 +14,7 @@ public class Facebook {
     // get these from your FB Dev App
     private static final String api_key = "1537497846368240";
     private static final String secret = "19c3043c61b982c6e5c5f2c7455a7982";
-    private static final String MY_ACCESS_TOKEN ="EAACEdEose0cBAN5hTscgXfVV0HJ8uLiy5Lhe493zyVuknT9YIu9HHxmFXnGBPghJkZAVoILNm7vRNGawzNLWAZCqnheA8I7qTyU8FKJLp7bUkUmkifDvaBcZBOwo6ceUosHkRjFchm2XcJwhN7omb3y6ixZAnpOvC4ya47AsqSfq1JVkEJPkicypZAHSLg2sZD";
+    private static final String MY_ACCESS_TOKEN ="EAACEdEose0cBAJuqPlwYJ5rZAmM8cjCLlWUrZC7ZAGYvRvebAOoCW7tZBZCGfz4GVjOKgFXvCM4E44VQPfk1RR4rwU2mZAUFmjUZAxfs0vl080jA3eQYizXNl7jhczZBgWYX7EOgRjHvk47NIlKaIMOfT2RCP3aPGz82r0sLF1uaUUUwEYjalyVyWJWHWY1ZBvRoZD";
 
     // set this to your servlet URL for the authentication servlet/filter
     private static final String redirect_uri = "localhost:8080/servlet/login";
