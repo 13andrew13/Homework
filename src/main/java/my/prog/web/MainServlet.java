@@ -1,11 +1,8 @@
 package my.prog.web;
 
 import my.prog.Factoy.Factory;
-import my.prog.controller.Controller;
-import my.prog.controller.CreateUserController;
-import my.prog.controller.LoginUserController;
+import my.prog.controller.*;
 
-import my.prog.controller.ProfileController;
 import my.prog.dao.UserDAOImpl;
 import my.prog.service.UserServiceImpl;
 
@@ -43,15 +40,16 @@ public class MainServlet extends HttpServlet{
                 .compose(UserServiceImpl::new)
                 .compose (UserDAOImpl::new)
                 .apply (Factory.getConnection ()));
-        CONTROLLER_MAP.put (new Request ("/servlet/profile","GET"), new ProfileController ());
-
+        CONTROLLER_MAP.put (new Request ("/servlet/profile","GET"), Factory.getSomething (ProfileController::new).compose (UserServiceImpl::new).compose (UserDAOImpl::new).apply (Factory.getConnection ()));
+        CONTROLLER_MAP.put (new Request ("/servlet/facebookLogin","GET"), Factory.getSomething (FacebookLoginController::new)
+                .compose(UserServiceImpl::new)
+                .compose (UserDAOImpl::new)
+                .apply (Factory.getConnection ()));
     }
 
     @Override
     public void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest (req,resp);
-
-
         if(req.getRequestURI ().equals ("/servlet/home")){
             req.getRequestDispatcher ("/WEB-INF/home.jsp").forward (req,resp);
         }
@@ -87,6 +85,6 @@ public class MainServlet extends HttpServlet{
         if(vm.getArgumentsMap ().isEmpty ()){
             return;
         }
-        //vm.getArgumentsMap ();
+        vm.getArgumentsMap ().forEach (req::setAttribute);
     }
 }

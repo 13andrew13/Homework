@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDAOImpl extends AbstractDAO<User>  implements UserDAO {
     public UserDAOImpl (Connection connection) {
@@ -32,9 +33,11 @@ public class UserDAOImpl extends AbstractDAO<User>  implements UserDAO {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement (builder.toString ());
-            ResultSet rs = statement.executeQuery ();
 
-            user = mapper.castToT (rs,user).get (0);
+            ResultSet rs = statement.executeQuery ();
+            List<User> res = mapper.castToT (rs,user);
+            if(!res.isEmpty ())
+                user = res.get (0);
 
         } catch (SQLException e) {
             e.printStackTrace ();

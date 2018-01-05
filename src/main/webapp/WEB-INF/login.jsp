@@ -1,35 +1,30 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: andrew
-  Date: 14.12.17
-  Time: 19:32
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Login</title>
+    <title>Sign Up</title>
+    <link href="/style/log.css" rel="stylesheet"/>
 </head>
-<body>
-<form id="login" action="/servlet/login" method="post">
 
+<body>
+<form id="loginForm" action="/servlet/login" method="post">
 
     <div class="field">
         <label>Enter your login:</label>
-        <div class="input"><input type="text" name="email"/></div>
+        <div class="input"><label>
+            <input type="email" name="email" value=""/>
+        </label></div>
     </div>
 
     <div class="field">
-        <a href="#" id="forgot">Forgot your password?</a>
         <label>Enter your password:</label>
-        <div class="input"><input type="password" name="password"/></div>
+        <div class="input"><label>
+            <input type="password" name="password"/>
+        </label></div>
     </div>
 
     <div class="submit">
         <button type="submit">Enter</button>
     </div>
-
 </form>
-
 </body>
 </html>

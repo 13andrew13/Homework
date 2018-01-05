@@ -22,7 +22,7 @@ public class CreateUserController implements Controller{
 
     @Override
     public ViewModel process (HttpServletRequest request, HttpServletResponse response) {
-        ViewModel vm = new ViewModel ("register");
+        ViewModel vm = new ViewModel ("login");
         if(request.getMethod ().equals (GET.toString ())){
             return new ViewModel ("register");
         }

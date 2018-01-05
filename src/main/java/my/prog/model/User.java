@@ -1,6 +1,7 @@
 package my.prog.model;
 
 
+import com.restfb.Facebook;
 import my.prog.annotations.Column;
 import my.prog.annotations.ID;
 import my.prog.annotations.Table;
@@ -8,16 +9,17 @@ import my.prog.annotations.Table;
 @Table (name = "USERS")
 public class User {
     @ID
+    @Facebook("id")
     private long id;
     @Column ("firstname")
+    @Facebook("name")
     private String name;
     @Column ("email")
+    @Facebook("email")
     private String email;
     @Column ("password")
     private String password;
     @Column ("token")
-
-
     private String token;
     public User(){}
     public User (String name, String email, String password){
